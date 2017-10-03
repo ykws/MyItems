@@ -8,14 +8,18 @@
 
 struct Item {
   var name: String
+  var completable: Bool
   var complete: Bool
   
-  init(name: String) {
+  init(name: String, completable: Bool) {
     self.name = name;
+    self.completable = completable
     complete = false
   }
   
   mutating func toggle() {
-    complete = !complete
+    if completable {
+      complete = !complete
+    }
   }
 }

@@ -37,8 +37,10 @@ class ViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) -> Void in
       if let textFields = alert.textFields {
         for textField in textFields {
-          self.items.append(Item(name: textField.text!))
+          self.items.append(Item(name: textField.text!, completable: false))
         }
+        self.items.append(Item(name: "todo", completable: true))
+
         self.tableView.reloadData()
       }
     }))
@@ -51,7 +53,7 @@ class ViewController: UITableViewController {
     super.viewDidLoad()
     
     for name in initialItems {
-      items.append(Item(name: name))
+      items.append(Item(name: name, completable: false))
     }
   }
 
