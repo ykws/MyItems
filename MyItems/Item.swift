@@ -8,11 +8,13 @@
 
 struct Item {
   var name: String
+  var deletable: Bool
   var completable: Bool
   var complete: Bool
   
-  init(name: String, completable: Bool) {
+  init(name: String, deletable: Bool, completable: Bool) {
     self.name = name;
+    self.deletable = deletable
     self.completable = completable
     complete = false
   }

@@ -37,9 +37,9 @@ class ViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) -> Void in
       if let textFields = alert.textFields {
         for textField in textFields {
-          self.items.append(Item(name: textField.text!, completable: false))
+          self.items.append(Item(name: textField.text!, deletable: false, completable: false))
         }
-        self.items.append(Item(name: "todo", completable: true))
+        self.items.append(Item(name: "todo", deletable: true, completable: true))
 
         self.tableView.reloadData()
       }
@@ -53,7 +53,7 @@ class ViewController: UITableViewController {
     super.viewDidLoad()
     
     for name in initialItems {
-      items.append(Item(name: name, completable: false))
+      items.append(Item(name: name, deletable: false, completable: false))
     }
   }
 
@@ -86,6 +86,10 @@ class ViewController: UITableViewController {
     tableView.reloadData()
   }
   
+  override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    return items[indexPath.row].deletable ? .delete : .none
+  }
+  
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       items.remove(at: indexPath.row)
@@ -94,6 +98,10 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    if !items[indexPath.row].deletable {
+      return UISwipeActionsConfiguration(actions: [])
+    }
+    
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
       self.items.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
