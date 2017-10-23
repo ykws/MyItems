@@ -83,5 +83,21 @@ class ViewController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
     tableView.reloadData()
   }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      items.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action: UIContextualAction, view: UIView, completionHandler: (Bool) -> Void) in
+      self.items.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+      completionHandler(true)
+    })
+    return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
 }
 
