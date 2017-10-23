@@ -92,11 +92,11 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let deleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action: UIContextualAction, view: UIView, completionHandler: (Bool) -> Void) in
+    let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
       self.items.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
       completionHandler(true)
-    })
+    }
     return UISwipeActionsConfiguration(actions: [deleteAction])
   }
 }
