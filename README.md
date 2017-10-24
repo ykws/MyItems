@@ -1,5 +1,6 @@
 # MyItems
 
+![Swift](https://img.shields.io/badge/Swift-3.1-orange.svg)
 [![Join the chat at https://gitter.im/ykws-MyItems/Lobby](https://badges.gitter.im/ykws-MyItems/Lobby.svg)](https://gitter.im/ykws-MyItems/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Checkable tableview on iOS
