@@ -37,23 +37,23 @@ class ViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) -> Void in
       if let textFields = alert.textFields {
         for textField in textFields {
-          self.items.append(Item(name: textField.text!, deletable: false, completable: false))
+          self.items.append(Item(title: textField.text!, subTitle: "todo", deletable: true, completable: true))
         }
-        self.items.append(Item(name: "todo", deletable: true, completable: true))
 
         self.tableView.reloadData()
       }
     }))
     present(alert, animated: true, completion: nil)
   }
+
   
   // MARK: - Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    for name in initialItems {
-      items.append(Item(name: name, deletable: false, completable: false))
+    for title in initialItems {
+      items.append(Item(title: title, subTitle: "language", deletable: false, completable: false));
     }
   }
 
@@ -73,9 +73,10 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    let cell: ItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ItemTableViewCell
     let item = items[indexPath.row]
-    cell.textLabel?.text = item.name
+    cell.titleLabel?.text = item.title
+    cell.subTitleLabel?.text = item.subTitle
     cell.accessoryType = item.complete ? .checkmark : .none
     return cell
   }
@@ -92,8 +93,7 @@ class ViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      items.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      delete(indexPath: indexPath)
     }
   }
   
@@ -103,11 +103,17 @@ class ViewController: UITableViewController {
     }
     
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
-      self.items.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      self.delete(indexPath: indexPath)
       completionHandler(true)
     }
     return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
+  
+  // MARK: - Helpers
+  
+  func delete(indexPath: IndexPath) {
+    items.remove(at: indexPath.row)
+    tableView.deleteRows(at: [indexPath], with: .fade)
   }
 }
 

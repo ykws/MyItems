@@ -7,13 +7,15 @@
 //
 
 struct Item {
-  var name: String
+  var title: String
+  var subTitle: String
   var deletable: Bool
   var completable: Bool
   var complete: Bool
   
-  init(name: String, deletable: Bool, completable: Bool) {
-    self.name = name;
+  init(title: String, subTitle: String, deletable: Bool, completable: Bool) {
+    self.title = title;
+    self.subTitle = subTitle
     self.deletable = deletable
     self.completable = completable
     complete = false
