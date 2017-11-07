@@ -37,9 +37,10 @@ class ViewController: UITableViewController {
     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) -> Void in
       if let textFields = alert.textFields {
         for textField in textFields {
-          self.items.append(Item(name: textField.text!, deletable: false, completable: false))
+          let name = textField.text!
+          self.items.append(Item(name: name, deletable: false, completable: false))
+          self.items.append(Item(category: name, name: "todo", deletable: true, completable: true))
         }
-        self.items.append(Item(name: "todo", deletable: true, completable: true))
 
         self.tableView.reloadData()
       }
@@ -92,8 +93,7 @@ class ViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      items.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      delete(at: indexPath)
     }
   }
   
@@ -103,11 +103,29 @@ class ViewController: UITableViewController {
     }
     
     let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, completionHandler in
-      self.items.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      self.delete(at: indexPath)
       completionHandler(true)
     }
     return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
+  
+  // MARK: - Helpers
+  
+  func delete(at indexPath: IndexPath) {
+    let category = items[indexPath.row].category
+    var indexPathes: [IndexPath] = Array()
+    for (row, item) in items.enumerated() {
+      if (item.category == category) {
+        indexPathes.append(IndexPath.init(row: row, section: indexPath.section))
+      }
+    }
+    
+    guard let minRow = indexPathes.first?.row, let maxRow = indexPathes.last?.row else {
+      return
+    }
+    
+    items.removeSubrange(minRow...maxRow)
+    tableView.deleteRows(at: indexPathes, with: .fade)
   }
 }
 
