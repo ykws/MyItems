@@ -225,8 +225,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     
     let delete = UIContextualAction(style: .normal,title: "削除", handler: { (action: UIContextualAction, view: UIView, success :(Bool) -> Void) in
-      self.kei.remove(at: indexPath.row)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+      self.delete(at: indexPath)
       success(true)
     })
     
