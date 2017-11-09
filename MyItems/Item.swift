@@ -12,17 +12,19 @@ struct Item {
   var deletable: Bool
   var completable: Bool
   var complete: Bool
+  var cellcolor: Bool
   
-  init(name: String, deletable: Bool, completable: Bool) {
-    self.init(category: name, name: name, deletable: deletable, completable: completable)
+  init(name: String, deletable: Bool, completable: Bool, cellcolor: Bool) {
+    self.init(category: name, name: name, deletable: deletable, completable: completable, cellcolor: cellcolor)
   }
   
-  init(category: String, name: String, deletable: Bool, completable: Bool) {
+  init(category: String, name: String, deletable: Bool, completable: Bool, cellcolor: Bool) {
     self.category = category
     self.name = name;
     self.deletable = deletable
     self.completable = completable
     complete = false
+    self.cellcolor = cellcolor
   }
 
   mutating func toggle() {
