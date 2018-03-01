@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ybc-oY-5yR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ybc-oY-5yR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--My Items-->
         <scene sceneID="KMw-cf-sig">
             <objects>
-                <tableViewController id="67s-kH-tms" customClass="ViewController" customModule="MyItems" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="67s-kH-tms" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dCp-YY-UfI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,6 +45,28 @@
             </objects>
             <point key="canvasLocation" x="513" y="41"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="g42-xJ-e3Z">
+            <objects>
+                <viewController id="JDi-mU-Vo2" customClass="ViewController" customModule="MyItems" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="psq-x2-JhJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="29o-de-xtj"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="gdt-Zv-CZE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="AAf-hZ-OiE">
+                            <connections>
+                                <action selector="addlabel:" destination="JDi-mU-Vo2" id="6N0-GL-DK9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYg-mf-5lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="15" y="-610"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lj9-gT-3QJ">
             <objects>
@@ -53,7 +76,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="67s-kH-tms" kind="relationship" relationship="rootViewController" id="I0v-AS-OPB"/>
+                        <segue destination="JDi-mU-Vo2" kind="relationship" relationship="rootViewController" id="s0D-X7-ClL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Izl-fu-L2X" userLabel="First Responder" sceneMemberID="firstResponder"/>
