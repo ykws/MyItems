@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     
   }
   
-  func longpress(sender: UILongPressGestureRecognizer){
+  @objc func longpress(_ sender: UILongPressGestureRecognizer){
   
     // 長押し開始〜
     if(sender.state == UIGestureRecognizerState.began)
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
   func longPressGesture() {
   
     // UILongPressGestureRecognizerインスタンス作成
-    let longPressGesture = UILongPressGestureRecognizer(target: self, action: Selector(("longPressGesture")))
+    let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longpress(_:)))
     //デリゲート先を自分に設定する。
     //longPressRecognizer.delegate
     // 時間（デフォルト0.5秒）
